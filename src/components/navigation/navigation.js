@@ -78,6 +78,143 @@ export default function PersistentDrawerLeft() {
     setOpen(!open);
   };
 
+  const toolbar = (
+    <Toolbar>
+      <IconButton
+        color="inherit"
+        aria-label="open drawer"
+        onClick={handleDrawerOpen}
+        edge="start"
+        sx={{ mr: 2, color: "#2A3042" }}
+      >
+        <MenuIcon />
+      </IconButton>
+      <Stack direction="row" alignItems="center" spacing={1}>
+        <Link to={`/user`}>
+          <Avatar
+            alt="Avatar"
+            className="avatar"
+            src={userData?.avatar}
+            sx={{ width: 40, height: 40 }}
+          />
+        </Link>
+        <IconButton
+          aria-label="account"
+          size="small"
+          edge="end"
+          color="inherit"
+        >
+          <IoChevronDown />
+        </IconButton>
+        <Link to={"/pengaturan"}>
+          <IconButton
+            aria-label="settings"
+            size="small"
+            edge="end"
+            color="inherit"
+          >
+            <IoSettingsOutline />
+          </IconButton>
+        </Link>
+      </Stack>
+    </Toolbar>
+  );
+
+  const drawer = (
+    <>
+      <DrawerHeader>
+        <img src={logo} alt="3DVT" width="100"></img>
+      </DrawerHeader>
+      <Divider
+        variant="string"
+        textAlign="left"
+        sx={{ pt: 2, color: "#a6b0cf" }}
+      >
+        Menu
+      </Divider>
+      <List>
+        {Menu.map((item, index) => {
+          return (
+            <ListItem key={index} className={item.cName} disablePadding>
+              <ListItemButton>
+                <Link to={item.path}>
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      pl: 2,
+                      pr: 2,
+                    }}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={item.title} />
+                </Link>
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
+      </List>
+      <Divider
+        variant="string"
+        textAlign="left"
+        sx={{ pt: 2, color: "#a6b0cf" }}
+      >
+        Segmentasi
+      </Divider>
+      <List>
+        {Segmentasi.map((item, index) => {
+          return (
+            <ListItem key={index} className={item.cName} disablePadding>
+              <ListItemButton>
+                <Link to={item.path}>
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      pl: 2,
+                      pr: 2,
+                    }}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={item.title} />
+                </Link>
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
+      </List>
+      <Divider
+        variant="string"
+        textAlign="left"
+        sx={{ pt: 2, color: "#a6b0cf" }}
+      >
+        Rekonstruksi
+      </Divider>
+      <List>
+        {Rekonstruksi.map((item, index) => {
+          return (
+            <ListItem key={index} className={item.cName} disablePadding>
+              <ListItemButton>
+                <Link to={item.path}>
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      pl: 2,
+                      pr: 2,
+                    }}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={item.title} />
+                </Link>
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
+      </List>
+    </>
+  );
+
   return (
     <Box sx={{ display: "flex" }}>
       <IconContext.Provider
@@ -91,45 +228,7 @@ export default function PersistentDrawerLeft() {
           open={open}
           sx={{ backgroundColor: "#FFFFFF" }}
         >
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={{ mr: 2, color: "#2A3042" }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Stack direction="row" alignItems="center" spacing={1}>
-              <Link to={`/user`}>
-                <Avatar
-                  alt="Avatar"
-                  className="avatar"
-                  src={userData?.avatar}
-                  sx={{ width: 40, height: 40 }}
-                />
-              </Link>
-              <IconButton
-                aria-label="account"
-                size="small"
-                edge="end"
-                color="inherit"
-              >
-                <IoChevronDown />
-              </IconButton>
-              <Link to={"/pengaturan"}>
-                <IconButton
-                  aria-label="settings"
-                  size="small"
-                  edge="end"
-                  color="inherit"
-                >
-                  <IoSettingsOutline />
-                </IconButton>
-              </Link>
-            </Stack>
-          </Toolbar>
+          {toolbar}
         </AppBar>
         <Drawer
           sx={{
@@ -146,94 +245,7 @@ export default function PersistentDrawerLeft() {
           anchor="left"
           open={open}
         >
-          <DrawerHeader>
-            <img src={logo} alt="3DVT" width="100"></img>
-          </DrawerHeader>
-          <Divider
-            variant="string"
-            textAlign="left"
-            sx={{ pt: 2, color: "#a6b0cf" }}
-          >
-            Menu
-          </Divider>
-          <List>
-            {Menu.map((item, index) => {
-              return (
-                <ListItem key={index} className={item.cName} disablePadding>
-                  <ListItemButton>
-                    <Link to={item.path}>
-                      <ListItemIcon
-                        sx={{
-                          minWidth: 0,
-                          pl: 2,
-                          pr: 2,
-                        }}
-                      >
-                        {item.icon}
-                      </ListItemIcon>
-                      <ListItemText primary={item.title} />
-                    </Link>
-                  </ListItemButton>
-                </ListItem>
-              );
-            })}
-          </List>
-          <Divider
-            variant="string"
-            textAlign="left"
-            sx={{ pt: 2, color: "#a6b0cf" }}
-          >
-            Segmentasi
-          </Divider>
-          <List>
-            {Segmentasi.map((item, index) => {
-              return (
-                <ListItem key={index} className={item.cName} disablePadding>
-                  <ListItemButton>
-                    <Link to={item.path}>
-                      <ListItemIcon
-                        sx={{
-                          minWidth: 0,
-                          pl: 2,
-                          pr: 2,
-                        }}
-                      >
-                        {item.icon}
-                      </ListItemIcon>
-                      <ListItemText primary={item.title} />
-                    </Link>
-                  </ListItemButton>
-                </ListItem>
-              );
-            })}
-          </List>
-          <Divider
-            variant="string"
-            textAlign="left"
-            sx={{ pt: 2, color: "#a6b0cf" }}
-          >
-            Rekonstruksi
-          </Divider>
-          {Rekonstruksi.map((item, index) => {
-            return (
-              <ListItem key={index} className={item.cName} disablePadding>
-                <ListItemButton>
-                  <Link to={item.path}>
-                    <ListItemIcon
-                      sx={{
-                        minWidth: 0,
-                        pl: 2,
-                        pr: 2,
-                      }}
-                    >
-                      {item.icon}
-                    </ListItemIcon>
-                    <ListItemText primary={item.title} />
-                  </Link>
-                </ListItemButton>
-              </ListItem>
-            );
-          })}
+          {drawer}
         </Drawer>
       </IconContext.Provider>
       <Main open={open}>

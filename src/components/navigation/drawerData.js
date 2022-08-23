@@ -12,7 +12,7 @@ export const Menu = [
   },
   {
     title: " Saran",
-    path: "/saran",
+    path: "/feedback",
     icon: <AiOutlineFileText />,
     cName: "nav-text",
   },

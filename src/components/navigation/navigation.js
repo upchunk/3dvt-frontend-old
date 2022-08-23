@@ -19,6 +19,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { IconContext } from "react-icons";
 import { Link, Outlet } from "react-router-dom";
 import logo from "../../assets/horizontal-white.png";
+import { Avatar } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -94,11 +95,16 @@ export default function PersistentDrawerLeft() {
               onClick={handleDrawerOpen}
               edge="start"
               sx={{ mr: 2, color: "#2A3042" }}
-              // sx={{ mr: 2, ...(open && { display: "none" }) }}
             >
               <MenuIcon />
             </IconButton>
           </Toolbar>
+          <Avatar
+            alt="Avatar"
+            className="avatar"
+            src={userData?.avatar}
+            sx={{ width: 70, height: 70 }}
+          />
         </AppBar>
         <Drawer
           sx={{

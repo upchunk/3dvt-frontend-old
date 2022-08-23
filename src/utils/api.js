@@ -4,8 +4,8 @@ import {
   setErrCatch,
   setErrMessage,
   setErrSeverity,
-} from "../../redux/crawlerConfig";
-import { store } from "../../redux/store";
+} from "../redux/runnerConfig";
+import { store } from "../redux/store";
 import * as url from "./urls";
 
 let controller;
@@ -54,16 +54,6 @@ export async function getTaskHistory(id) {
   }
   controller = new AbortController();
   return await axios.get(url.taskHistoryUrl(id), {
-    signal: controller.signal,
-  });
-}
-
-export async function getPlatformHistory(id, type, platform) {
-  if (controller != undefined) {
-    controller.abort();
-  }
-  controller = new AbortController();
-  return await axios.get(url.platformHistoryUrl(id, type, platform), {
     signal: controller.signal,
   });
 }

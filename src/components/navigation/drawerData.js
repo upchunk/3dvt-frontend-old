@@ -6,7 +6,7 @@ import { TbCameraPlus, TbCamera, TbBox } from "react-icons/tb";
 export const Menu = [
   {
     title: " Dashboard",
-    path: "/dashboard",
+    path: "/",
     icon: <BiHomeCircle />,
     cName: "nav-text",
   },

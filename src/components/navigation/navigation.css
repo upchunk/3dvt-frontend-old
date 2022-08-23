@@ -16,6 +16,16 @@
   font-size: larger;
 }
 
+.avatar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.inline {
+  display: inline-flex;
+  flex-direction: row;
+}
+
 .nav-tex:hover {
   color: whitesmoke;
 }

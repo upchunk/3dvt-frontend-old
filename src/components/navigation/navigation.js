@@ -20,6 +20,9 @@ import { IconContext } from "react-icons";
 import { Link, Outlet } from "react-router-dom";
 import logo from "../../assets/horizontal-white.png";
 import { Avatar } from "@mui/material";
+import { useSelector } from "react-redux";
+import { IoChevronDown, IoSettingsOutline } from "react-icons/io5";
+import { Stack } from "@mui/system";
 
 const drawerWidth = 240;
 
@@ -70,7 +73,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function PersistentDrawerLeft() {
   const [open, setOpen] = React.useState(true);
-
+  const userData = useSelector((state) => state.userConfig.userData);
   const handleDrawerOpen = () => {
     setOpen(!open);
   };
@@ -98,13 +101,35 @@ export default function PersistentDrawerLeft() {
             >
               <MenuIcon />
             </IconButton>
+            <Stack direction="row" alignItems="center" spacing={1}>
+              <Link to={`/user`}>
+                <Avatar
+                  alt="Avatar"
+                  className="avatar"
+                  src={userData?.avatar}
+                  sx={{ width: 40, height: 40 }}
+                />
+              </Link>
+              <IconButton
+                aria-label="account"
+                size="small"
+                edge="end"
+                color="inherit"
+              >
+                <IoChevronDown />
+              </IconButton>
+              <Link to={"/pengaturan"}>
+                <IconButton
+                  aria-label="settings"
+                  size="small"
+                  edge="end"
+                  color="inherit"
+                >
+                  <IoSettingsOutline />
+                </IconButton>
+              </Link>
+            </Stack>
           </Toolbar>
-          <Avatar
-            alt="Avatar"
-            className="avatar"
-            src={userData?.avatar}
-            sx={{ width: 70, height: 70 }}
-          />
         </AppBar>
         <Drawer
           sx={{

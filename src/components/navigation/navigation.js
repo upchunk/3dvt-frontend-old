@@ -19,7 +19,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { IconContext } from "react-icons";
 import { Link, Outlet } from "react-router-dom";
 import logo from "../../assets/horizontal-white.png";
-import { Avatar } from "@mui/material";
+import { Avatar, Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 import { IoChevronDown, IoSettingsOutline } from "react-icons/io5";
 import { Stack } from "@mui/system";
@@ -80,43 +80,53 @@ export default function PersistentDrawerLeft() {
 
   const toolbar = (
     <Toolbar>
-      <IconButton
-        color="inherit"
-        aria-label="open drawer"
-        onClick={handleDrawerOpen}
-        edge="start"
-        sx={{ mr: 2, color: "#2A3042" }}
+      <Grid
+        justify="space-between" // Add it here :)
+        container
+        spacing={24}
       >
-        <MenuIcon />
-      </IconButton>
-      <Stack direction="row" alignItems="center" spacing={1}>
-        <Link to={`/user`}>
-          <Avatar
-            alt="Avatar"
-            className="avatar"
-            src={userData?.avatar}
-            sx={{ width: 40, height: 40 }}
-          />
-        </Link>
-        <IconButton
-          aria-label="account"
-          size="small"
-          edge="end"
-          color="inherit"
-        >
-          <IoChevronDown />
-        </IconButton>
-        <Link to={"/pengaturan"}>
+        <Grid item>
           <IconButton
-            aria-label="settings"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{ mr: 2, color: "#2A3042" }}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Grid>
+      </Grid>
+      <Grid item>
+        <Stack direction="row" alignItems="center" spacing={1}>
+          <Link to={`/user`}>
+            <Avatar
+              alt="Avatar"
+              className="avatar"
+              src={userData?.avatar}
+              sx={{ width: 40, height: 40 }}
+            />
+          </Link>
+          <IconButton
+            aria-label="account"
             size="small"
             edge="end"
             color="inherit"
           >
-            <IoSettingsOutline />
+            <IoChevronDown />
           </IconButton>
-        </Link>
-      </Stack>
+          <Link to={"/pengaturan"}>
+            <IconButton
+              aria-label="settings"
+              size="small"
+              edge="end"
+              color="inherit"
+            >
+              <IoSettingsOutline />
+            </IconButton>
+          </Link>
+        </Stack>
+      </Grid>
     </Toolbar>
   );
 

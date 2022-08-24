@@ -3,7 +3,7 @@ import { BiHomeCircle } from "react-icons/bi";
 import { AiOutlineFileText } from "react-icons/ai";
 import { TbCameraPlus, TbCamera, TbBox } from "react-icons/tb";
 
-export const Menu = [
+export const MainMenu = [
   {
     title: " Dashboard",
     path: "/",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Dashboard from "./pages/dashboard/dashboard";
@@ -10,8 +10,20 @@ import Pengaturan from "./pages/pengaturan/pengaturan";
 import DataSegmentasi from "./pages/dataSegmentasi/dataSegmentasi";
 import DataRekonstruksi from "./pages/dataRekonstruksi/dataRekonstruksi";
 import User from "./pages/user/user";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserInfo } from "./utils/api";
+import { setUserData } from "./redux/userConfig";
 
 function App() {
+  const userid = useSelector((state) => state.userConfig.userid);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getUserInfo(userid).then((res) => {
+      dispatch(setUserData(res.data));
+    });
+  }, [userid]);
+
   return (
     <BrowserRouter>
       <Routes>

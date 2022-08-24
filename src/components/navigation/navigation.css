@@ -21,6 +21,12 @@
   justify-content: flex-end;
 }
 
+.username {
+  font-size: medium;
+  color: grey;
+  padding-right: 0.25vw;
+}
+
 .inline {
   display: inline-flex;
   flex-direction: row;

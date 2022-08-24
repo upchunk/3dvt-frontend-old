@@ -3,7 +3,7 @@ import jwt_decode from "jwt-decode";
 import * as api from "../utils/api";
 
 const initialState = {
-  userid: "",
+  userid: 1,
   loading: true,
   reload: false,
   popUp: false,

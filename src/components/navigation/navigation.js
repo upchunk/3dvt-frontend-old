@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./navigation.css";
-import { Menu, Rekonstruksi, Segmentasi } from "./drawerData";
+import { MainMenu, Rekonstruksi, Segmentasi } from "./drawerData";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -22,7 +22,9 @@ import logo from "../../assets/horizontal-white.png";
 import { Avatar, Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 import { IoChevronDown, IoSettingsOutline } from "react-icons/io5";
-import { Stack } from "@mui/system";
+import Stack from "@mui/system/Stack";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 const drawerWidth = 240;
 
@@ -65,7 +67,7 @@ const AppBar = styled(MuiAppBar, {
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  padding: theme.spacing(0, 1),
+  padding: theme.spacing(1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: "center",
@@ -76,6 +78,15 @@ export default function PersistentDrawerLeft() {
   const userData = useSelector((state) => state.userConfig.userData);
   const handleDrawerOpen = () => {
     setOpen(!open);
+  };
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const popup = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   const toolbar = (
@@ -107,14 +118,34 @@ export default function PersistentDrawerLeft() {
               sx={{ width: 40, height: 40 }}
             />
           </Link>
-          <IconButton
-            aria-label="account"
-            size="small"
-            edge="end"
-            color="inherit"
-          >
-            <IoChevronDown />
-          </IconButton>
+          <p className="username">{String(userData?.username)}</p>
+          <div>
+            <IconButton
+              aria-label="account"
+              aria-controls={popup ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={popup ? "true" : undefined}
+              onClick={handleClick}
+              size="small"
+              edge="end"
+              color="inherit"
+            >
+              <IoChevronDown />
+            </IconButton>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={popup}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "IconButton",
+              }}
+            >
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem onClick={handleClose}>Logout</MenuItem>
+            </Menu>
+          </div>
           <Link to={"/pengaturan"}>
             <IconButton
               aria-label="settings"
@@ -143,7 +174,7 @@ export default function PersistentDrawerLeft() {
         Menu
       </Divider>
       <List>
-        {Menu.map((item, index) => {
+        {MainMenu.map((item, index) => {
           return (
             <ListItem key={index} className={item.cName} disablePadding>
               <ListItemButton>

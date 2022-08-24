@@ -19,19 +19,11 @@ const ErrorViewer = (error) => {
     Object.keys(error.response.data).map((each) =>
       errorList.push(toHeaderCase(each) + ": " + error.response.data[each])
     );
-    // alert(errorList.join("\n"));
-    // console.log(error.response.headers);
     var message = errorList.join("\n");
     store.dispatch(setErrSeverity("error"));
     store.dispatch(setErrMessage(message));
     store.dispatch(setErrCatch(true));
   }
-  // else if (error.request) {
-  //   console.log(error.request);
-  // } else {
-  //   console.log("Error", error.message);
-  // }
-  // console.log(error.config);
 };
 
 export async function deleteAuthHeader() {

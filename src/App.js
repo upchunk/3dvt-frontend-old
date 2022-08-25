@@ -13,6 +13,8 @@ import User from "./pages/user/user";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserInfo } from "./utils/api";
 import { setUserData } from "./redux/userConfig";
+import AuthPage from "./pages/authPage/authPage";
+import Snackbars from "./components/snackbar/snackbar";
 
 function App() {
   const userid = useSelector((state) => state.userConfig.userid);
@@ -25,20 +27,25 @@ function App() {
   }, [userid]);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<PersistentDrawerLeft />}>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/segmentasi" element={<Segmentasi />} />
-          <Route path="/segmentasi/data" element={<DataSegmentasi />} />
-          <Route path="/rekonstruksi" element={<Rekonstruksi3d />} />
-          <Route path="/rekonstruksi/data" element={<DataRekonstruksi />} />
-          <Route path="/feedback" element={<Feedback />} />
-          <Route path="/pengaturan" element={<Pengaturan />} />
-          <Route path="/user" element={<User />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <>
+      <Snackbars />
+      <BrowserRouter>
+        <Routes>
+          <Route element={<PersistentDrawerLeft />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/segmentasi" element={<Segmentasi />} />
+            <Route path="/segmentasi/data" element={<DataSegmentasi />} />
+            <Route path="/rekonstruksi" element={<Rekonstruksi3d />} />
+            <Route path="/rekonstruksi/data" element={<DataRekonstruksi />} />
+            <Route path="/feedback" element={<Feedback />} />
+            <Route path="/pengaturan" element={<Pengaturan />} />
+            <Route path="/user" element={<User />} />
+          </Route>
+          <Route path="/masuk" element={<AuthPage page={"Masuk"} />} exact />
+          <Route path="/daftar" element={<AuthPage page={"daftar"} />} exact />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

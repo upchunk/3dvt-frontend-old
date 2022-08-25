@@ -1,0 +1,8 @@
+.white {
+  color: black;
+  background-color: white;
+}
+
+.soften {
+  border-radius: 5px;
+}

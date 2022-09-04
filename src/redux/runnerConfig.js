@@ -9,6 +9,8 @@ const initialState = {
   errCatch: false,
   errMessage: "",
   errSeverity: "warning",
+  files: [],
+  model: "",
 };
 
 export const runnerConfigSlice = createSlice({
@@ -39,6 +41,12 @@ export const runnerConfigSlice = createSlice({
     setErrSeverity: (state, action) => {
       state.errSeverity = action.payload;
     },
+    setFiles: (state, action) => {
+      state.files = action.payload;
+    },
+    setModel: (state, action) => {
+      state.model = action.payload;
+    },
   },
 });
 
@@ -52,6 +60,8 @@ export const {
   setErrMessage,
   setErrCatch,
   setErrSeverity,
+  setFiles,
+  setModel,
 } = runnerConfigSlice.actions;
 
 export default runnerConfigSlice.reducer;

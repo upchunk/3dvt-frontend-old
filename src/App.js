@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Dashboard from "./pages/dashboard/dashboard";
-import Segmentasi from "./pages/dataSegmentasi/dataSegmentasi";
 import Rekonstruksi3d from "./pages/rekonstruksi3d/rekonstruksi3d";
 import Feedback from "./pages/feedback/feedback";
 import PersistentDrawerLeft from "./components/navigation/navigation";
@@ -22,6 +21,7 @@ import AuthPage from "./pages/authPage/authPage";
 import Snackbars from "./components/snackbar/snackbar";
 import * as api from "./utils/api";
 import PrivateWrapper from "./utils/PrivateWrapper";
+import Segmentasi from "./pages/segmentasi/segmentasi";
 
 function App() {
   const userid = useSelector((state) => state.userConfig.userid);

@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Button, FormControl, TextField } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  FormControl,
+  FormLabel,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toHeaderCase } from "js-convert-case";
@@ -12,7 +23,6 @@ import {
   setErrMessage,
   setErrSeverity,
 } from "../../redux/runnerConfig";
-import Card from "../common/card/card";
 
 export default function LoginAndRegister({ page }) {
   const dispatch = useDispatch();
@@ -65,22 +75,23 @@ export default function LoginAndRegister({ page }) {
   const Login = (
     <>
       <FormControl sx={{ marginBottom: 1 }} fullWidth>
+        <FormLabel>Username:</FormLabel>
         <TextField
           className="white soften"
           type="string"
           variant="outlined"
-          placeholder="Username"
-          sx={{ marginBottom: 1 }}
+          placeholder="Masukkan Username"
+          sx={{ marginBottom: 2 }}
           onChange={(e) =>
             setRequestBody({ ...requestBody, username: e.target.value })
           }
         />
+        <FormLabel>Password:</FormLabel>
         <TextField
           className="white soften"
           type="password"
-          placeholder="Password"
+          placeholder="Masukkan Password"
           variant="outlined"
-          sx={{ marginBottom: 1 }}
           onChange={(e) =>
             setRequestBody({ ...requestBody, password: e.target.value })
           }
@@ -92,6 +103,7 @@ export default function LoginAndRegister({ page }) {
   const Register = (
     <div>
       <FormControl sx={{ marginBottom: 1 }} fullWidth>
+        <FormLabel>Username</FormLabel>
         <TextField
           className="white soften"
           size="small"
@@ -103,6 +115,7 @@ export default function LoginAndRegister({ page }) {
             setRequestBody({ ...requestBody, username: e.target.value })
           }
         />
+        <FormLabel>Name</FormLabel>
         <TextField
           className="white soften"
           size="small"
@@ -114,17 +127,19 @@ export default function LoginAndRegister({ page }) {
             setRequestBody({ ...requestBody, full_name: e.target.value })
           }
         />
+        <FormLabel>Institusi</FormLabel>
         <TextField
           className="white soften"
           size="small"
           type="string"
-          placeholder="Masukkan Institusi"
+          placeholder="Masukkan Asal Institusi"
           variant="outlined"
           sx={{ marginBottom: 1 }}
           onChange={(e) =>
             setRequestBody({ ...requestBody, institution: e.target.value })
           }
         />
+        <FormLabel>Email</FormLabel>
         <TextField
           className="white soften"
           size="small"
@@ -136,6 +151,7 @@ export default function LoginAndRegister({ page }) {
             setRequestBody({ ...requestBody, email: e.target.value })
           }
         />
+        <FormLabel>Password</FormLabel>
         <TextField
           className="white soften"
           size="small"
@@ -162,26 +178,49 @@ export default function LoginAndRegister({ page }) {
     </div>
   );
 
+  const cardTitle = (
+    <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+      {toHeaderCase(page)}
+    </Typography>
+  );
+
   return (
-    <>
-      <Card className="wrapcard">
-        <img src={logo} alt="3DVT" className="logo"></img>
-        <div>
-          <span>
-            <h3 className="headerFont">{toHeaderCase(page)} </h3>
-          </span>
-          {page === "masuk" ? Login : Register}
-          <div className="reversed-row">
-            <Button
-              variant="contained"
-              onClick={page === "masuk" ? handleLogin : handleRegister}
-              onKeyDown={detectKeyDown}
-              sx={{ mt: 1, mb: 1, width: "100%", backgroundColor: "#0148A9" }}
-            >
-              {toHeaderCase(page)}
-            </Button>
-          </div>
-        </div>
+    <div>
+      <Card sx={{ maxWidth: 400, height: "content", p: 1, mb: 3 }}>
+        <CardMedia
+          component="img"
+          height="150"
+          image={logo}
+          alt="3DVT Logo"
+          sx={{ pt: 5, pb: 3, paddingX: 7 }}
+        />
+        <CardHeader
+          sx={{
+            backgroundColor: "white",
+            color: "black",
+            p: 0,
+            m: 0,
+          }}
+          align="center"
+          title={cardTitle}
+        />
+        <CardContent>{page === "masuk" ? Login : Register}</CardContent>
+        <CardActions sx={{ justifyContent: "center", paddingBottom: 3 }}>
+          <Button
+            variant="contained"
+            onClick={page === "masuk" ? handleLogin : handleRegister}
+            onKeyDown={detectKeyDown}
+            sx={{
+              width: "90%",
+              backgroundColor: "#0148A9",
+              paddingX: 3,
+              paddingBottom: 1,
+              align: "center",
+            }}
+          >
+            {toHeaderCase(page)}
+          </Button>
+        </CardActions>
       </Card>
       <div className="center-text">
         {page === "masuk" ? (
@@ -200,6 +239,6 @@ export default function LoginAndRegister({ page }) {
           </p>
         )}
       </div>
-    </>
+    </div>
   );
 }

@@ -1,10 +1,11 @@
 import React from "react";
+import StyledDropzone from "../../components/dropzone/dropzone";
 import "./segmentasi.css";
 
 export default function Segmentasi() {
   return (
     <div className="segmentasi">
-      <h1 className="textRow">Coming Soon</h1>
+      <StyledDropzone></StyledDropzone>
     </div>
   );
 }

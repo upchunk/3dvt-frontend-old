@@ -62,7 +62,7 @@ export async function jwtauthenticate(data) {
 
 export async function postSegmentasi(formData) {
   axios
-    .post(url.SegmentationUrl, formData, {
+    .post(url.SegmentationUrl(), formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

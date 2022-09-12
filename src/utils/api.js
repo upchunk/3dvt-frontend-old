@@ -68,7 +68,10 @@ export async function postSegmentasi(formData) {
       },
     })
     .then((res) => {
-      return res;
+      console.log(res);
+      store.dispatch(setErrSeverity("success"));
+      store.dispatch(setErrMessage(res.data.message));
+      store.dispatch(setErrCatch(true));
     })
     .catch((error) => {
       ErrorViewer(error);

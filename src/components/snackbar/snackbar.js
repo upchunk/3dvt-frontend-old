@@ -23,7 +23,7 @@ export default function Snackbars() {
   };
 
   return (
-    <Snackbar open={errCatch} autoHideDuration={6000} onClose={handleClose}>
+    <Snackbar open={errCatch} autoHideDuration={3000} onClose={handleClose}>
       <Alert
         onClose={handleClose}
         severity={errSeverity}

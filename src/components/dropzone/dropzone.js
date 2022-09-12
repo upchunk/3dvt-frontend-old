@@ -90,9 +90,9 @@ export default function StyledDropzone() {
   );
 
   const handleSubmit = () => {
-    postSegmentasi(formData).then((response) => {
-      console.log(response);
-    });
+    if (files.length !== 0) {
+      postSegmentasi(formData);
+    }
   };
 
   return (
@@ -153,9 +153,7 @@ export default function StyledDropzone() {
                 <h4>Files: </h4>
                 <ul>{files}</ul>
               </aside>
-            ) : (
-              <></>
-            )}
+            ) : null}
           </Grid>
         </Grid>
       </CardContent>

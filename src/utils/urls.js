@@ -10,26 +10,6 @@ export const userInfoUrl = (id) => `/api/users/${id}/`;
 
 export const groupInfoUrl = (id) => `/api/group/${id}/`;
 
-export const taskHistoryUrl = (id) => `/api/historydata/?userid=${id}`;
-
-export const postTaskUrl = () => `/api/realtime/`;
-
-export const postTaskbasedUrl = () => `/api/taskbased/`;
-
-export const getDataUrl = (task_id) => `/api/resultdata/${task_id}/`;
-
-export const postLegacyUrl = () => `/api/legacy/`;
-
-export const getLegacyUrl = (task_id) => `/api/legacy/${task_id}/`;
-
-export const ScheduleUrl = () => `/api/schedules/`;
-
-export const ScheduleItemsUrl = (id) => `/api/schedules/${id}/`;
-
-export const CrontabItemsUrl = (id) => `/api/crontab/${id}/`;
-
-export const MappingTableUrl = (id) => `/api/usertask/?user=${id}`;
-
 export const JWTAuthenticateUrl = () => `/api/token/`;
 
 export const RefreshTokenUrl = () => `/api/token/refresh/`;
@@ -46,10 +26,10 @@ export const LogOutUrl = () => `/api/logout/`;
 
 export const LogOutAllUrl = () => `/api/logout/all/`;
 
-export const SegmentationListUrl = () => `/api/segmentation/`;
+export const SegmentationUrl = () => `/api/segmentation/`;
 
-export const SegmentationGetUrl = () => `/api/segmentation/${id}/`;
+export const SegmentationObjectUrl = () => `/api/segmentation/${id}/`;
 
-export const ReconstructionListUrl = () => `/api/reconstruction/`;
+export const ReconstructionUrl = () => `/api/reconstruction/`;
 
-export const ReconstructionGetUrl = () => `/api/reconstruction/${id}/`;
+export const ReconstructionObjectUrl = () => `/api/reconstruction/${id}/`;

@@ -14,6 +14,7 @@ import {
   Select,
   Typography,
 } from "@mui/material";
+import { postSegmentasi } from "../../utils/api";
 
 const baseStyle = {
   flex: 1,
@@ -56,12 +57,12 @@ export default function StyledDropzone() {
   } = useDropzone({ accept: { "image/*": [] } });
   const [modelIndex, setModelIndex] = useState(0);
   const models = ["model_tesis_epoch20_sz448.hdf5"];
-  const [requestBody, setRequestBody] = useState({
-    model: models[modelIndex],
-    files: acceptedFiles,
-  });
 
-  const file = acceptedFiles.map((each) => <a key={each.path}>{each.path}</a>);
+  let formData = new FormData();
+
+  const files = acceptedFiles.map((file) => (
+    <li key={file.path}>{file.path}</li>
+  ));
 
   const style = useMemo(
     () => ({
@@ -74,18 +75,25 @@ export default function StyledDropzone() {
   );
 
   useEffect(() => {
-    setRequestBody({
-      ...requestBody,
-      model: models[modelIndex],
-      files: acceptedFiles,
-    });
-  }, [modelIndex, acceptedFiles]);
+    formData.append("user", 1);
+    formData.append("model", models[modelIndex]);
+  }, [modelIndex]);
+
+  acceptedFiles.map((file) => {
+    formData.append("images", file, file.name);
+  });
 
   const cardTitle = (
     <Typography variant="body1" sx={{ fontWeight: "bold" }}>
       Buat Projek Segmentasi Baru
     </Typography>
   );
+
+  const handleSubmit = () => {
+    postSegmentasi(formData).then((response) => {
+      console.log(response);
+    });
+  };
 
   return (
     <Card sx={{ p: 3 }}>
@@ -140,10 +148,10 @@ export default function StyledDropzone() {
                 <p>{"Tarik dan lepas file disini untuk mengunggah"}</p>
               </div>
             </div>
-            {file.length !== 0 ? (
+            {files.length !== 0 ? (
               <aside>
                 <h4>Files: </h4>
-                <li>{file}</li>
+                <ul>{files}</ul>
               </aside>
             ) : (
               <></>
@@ -152,12 +160,7 @@ export default function StyledDropzone() {
         </Grid>
       </CardContent>
       <CardActions>
-        <Button
-          onClick={() => {
-            console.log(requestBody);
-          }}
-          variant="contained"
-        >
+        <Button onClick={handleSubmit} variant="contained">
           Run
         </Button>
       </CardActions>

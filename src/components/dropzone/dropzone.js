@@ -15,6 +15,8 @@ import {
   Typography,
 } from "@mui/material";
 import { postSegmentasi } from "../../utils/api";
+import { useDispatch } from "react-redux";
+import { setResultImages, setSourceImages } from "../../redux/runnerConfig";
 
 const baseStyle = {
   flex: 1,
@@ -57,6 +59,7 @@ export default function StyledDropzone() {
   } = useDropzone({ accept: { "image/*": [] } });
   const [modelIndex, setModelIndex] = useState(0);
   const models = ["model_tesis_epoch20_sz448.hdf5"];
+  const dispatch = useDispatch();
 
   let formData = new FormData();
 
@@ -89,11 +92,13 @@ export default function StyledDropzone() {
     </Typography>
   );
 
-  const handleSubmit = () => {
-    if (files.length !== 0) {
-      postSegmentasi(formData);
-    }
-  };
+  async function handleSubmit() {
+    if (acceptedFiles.length > 0)
+      postSegmentasi(formData).then((res) => {
+        dispatch(setSourceImages(res.task_data.sources));
+        dispatch(setResultImages(res.task_data.results));
+      });
+  }
 
   return (
     <Card sx={{ p: 3 }}>

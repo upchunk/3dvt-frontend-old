@@ -9,7 +9,7 @@ import { store } from "../redux/store";
 import { setAuth } from "../redux/userConfig";
 import * as url from "./urls";
 
-const ErrorViewer = (error) => {
+export const ErrorViewer = (error) => {
   const errorList = [];
   if (error.response) {
     errorList.push(
@@ -56,12 +56,11 @@ export async function jwtauthenticate(data) {
     })
     .catch((error) => {
       ErrorViewer(error);
-      return error;
     });
 }
 
 export async function postSegmentasi(formData) {
-  axios
+  return await axios
     .post(url.SegmentationUrl(), formData, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -72,10 +71,23 @@ export async function postSegmentasi(formData) {
       store.dispatch(setErrSeverity("success"));
       store.dispatch(setErrMessage(res.data.message));
       store.dispatch(setErrCatch(true));
+      return res.data;
     })
     .catch((error) => {
       ErrorViewer(error);
     });
+}
+
+export async function listSegmentasi() {
+  return await axios.get(url.SegmentationUrl()).catch((error) => {
+    ErrorViewer(error);
+  });
+}
+
+export async function getSegmentasi(id) {
+  return await axios.get(url.SegmentationObjectUrl(id)).catch((error) => {
+    ErrorViewer(error);
+  });
 }
 
 export async function Register(data) {

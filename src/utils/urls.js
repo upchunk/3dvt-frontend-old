@@ -26,10 +26,11 @@ export const LogOutUrl = () => `/api/logout/`;
 
 export const LogOutAllUrl = () => `/api/logout/all/`;
 
-export const SegmentationUrl = () => `/api/segmentation/`;
+export const SegmentationUrl = (userid, groupname, status) =>
+  `api/segmentation/?id=${userid}&groupname=${groupname}&status=${status}`;
 
-export const SegmentationObjectUrl = () => `/api/segmentation/${id}/`;
+export const SegmentationObjectUrl = (id) => `/api/segmentation/${id}/`;
 
 export const ReconstructionUrl = () => `/api/reconstruction/`;
 
-export const ReconstructionObjectUrl = () => `/api/reconstruction/${id}/`;
+export const ReconstructionObjectUrl = (id) => `/api/reconstruction/${id}/`;

@@ -5,6 +5,8 @@ const initialState = {
   lastType: "",
   type: "",
   result: "",
+  segData: [],
+  recData: [],
   page: "dashboard",
   errCatch: false,
   errMessage: "",
@@ -30,6 +32,12 @@ export const runnerConfigSlice = createSlice({
     },
     setResult: (state, action) => {
       state.result = JSON.stringify(action.payload, null, 2);
+    },
+    setSegData: (state, action) => {
+      state.segData = action.payload;
+    },
+    setRecData: (state, action) => {
+      state.recData = action.payload;
     },
     setPage: (state, action) => {
       state.page = action.payload;
@@ -64,6 +72,8 @@ export const {
   setType,
   setLastType,
   setResult,
+  setSegData,
+  setRecData,
   setPage,
   setErrMessage,
   setErrCatch,

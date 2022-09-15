@@ -78,10 +78,12 @@ export async function postSegmentasi(formData) {
     });
 }
 
-export async function listSegmentasi() {
-  return await axios.get(url.SegmentationUrl()).catch((error) => {
-    ErrorViewer(error);
-  });
+export async function listSegmentasi(userid = "", groupname = "", status = "") {
+  return await axios
+    .get(url.SegmentationUrl(userid, groupname, status))
+    .catch((error) => {
+      ErrorViewer(error);
+    });
 }
 
 export async function getSegmentasi(id) {

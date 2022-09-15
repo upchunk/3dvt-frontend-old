@@ -44,16 +44,23 @@ function App() {
   }
 
   useEffect(() => {
-    let fourmin = 1000 * 60 * 4; // 1000ms (1s) * 60s (1m) * 4m
+    let delay = 1000 * 60 * 29; // 29Min Delay
     let interval = setInterval(() => {
       updateToken();
-    }, fourmin);
+    }, delay);
     return () => clearInterval(interval);
   }, [jwtToken]);
 
   useEffect(() => {
+    getUserInfo(userid).then((res) => {
+      dispatch(setUserData(res.data));
+    });
+  }, [userid]);
+
+  useEffect(() => {
     var groupList = [];
-    userData.groups?.forEach((id) =>
+    userData.groups?.forEach((id) => {
+      console.log("GroupList loop");
       api
         .getGroupInfo(id)
         .then((res) => {
@@ -61,15 +68,9 @@ function App() {
         })
         .then(() => {
           dispatch(setGroupNames(groupList));
-        })
-    );
-  }, [userData]);
-
-  useEffect(() => {
-    getUserInfo(userid).then((res) => {
-      dispatch(setUserData(res.data));
+        });
     });
-  }, [userid]);
+  }, [userData]);
 
   return (
     <>

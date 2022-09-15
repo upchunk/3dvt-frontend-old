@@ -1,7 +1,7 @@
 import "react-image-gallery/styles/css/image-gallery.css";
 import React from "react";
 import ImageGallery from "react-image-gallery";
-import { Card, Grid } from "@mui/material";
+import { Card, Grid, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 
 export default function ImageGalleryViewer() {
@@ -12,7 +12,16 @@ export default function ImageGalleryViewer() {
     <Card sx={{ p: 3, mt: 2 }}>
       <Grid container spacing={2}>
         <Grid item xs={6}>
+          <Typography
+            align="center"
+            paddingBottom={1}
+            fontFamily={"Montserrat"}
+            fontWeight={"Bold"}
+          >
+            Citra Yang Dimasukkan
+          </Typography>
           <ImageGallery
+            lazyLoad={true}
             items={source}
             showFullscreenButton={false}
             showPlayButton={false}
@@ -20,7 +29,16 @@ export default function ImageGalleryViewer() {
           />
         </Grid>
         <Grid item xs={6}>
+          <Typography
+            align="center"
+            paddingBottom={1}
+            fontFamily={"Montserrat"}
+            fontWeight={"Bold"}
+          >
+            Citra Hasil Segmentasi
+          </Typography>
           <ImageGallery
+            lazyLoad={true}
             items={result}
             showFullscreenButton={false}
             showPlayButton={false}

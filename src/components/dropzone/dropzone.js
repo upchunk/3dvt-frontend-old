@@ -9,7 +9,6 @@ import {
   CardHeader,
   FormControl,
   Grid,
-  InputLabel,
   MenuItem,
   Select,
   Typography,
@@ -87,7 +86,7 @@ export default function StyledDropzone() {
   });
 
   const cardTitle = (
-    <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+    <Typography variant="h6" fontFamily={"Montserrat"} fontWeight={"bold"}>
       Buat Projek Segmentasi Baru
     </Typography>
   );
@@ -121,7 +120,6 @@ export default function StyledDropzone() {
           </Grid>
           <Grid item xs={10}>
             <FormControl fullWidth>
-              <InputLabel>Pilih Model Segmentasi</InputLabel>
               <Select
                 value={modelIndex}
                 onChange={(e) => setModelIndex(e.target.value)}

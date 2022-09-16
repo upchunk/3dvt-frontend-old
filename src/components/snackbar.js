@@ -2,7 +2,7 @@ import * as React from "react";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { useDispatch, useSelector } from "react-redux";
-import { setErrCatch, setErrMessage } from "../../redux/runnerConfig";
+import { setErrCatch, setErrMessage } from "../redux/runnerConfig";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;

@@ -36,17 +36,18 @@ export default function LoginAndRegister({ page }) {
 
   useEffect(() => {
     deleteAuthHeader();
-    document.addEventListener("keydown", detectKeyDown);
-    return () => document.removeEventListener("keydown", detectKeyDown);
+    window.localStorage.clear();
+    window.sessionStorage.clear();
   }, []);
 
-  const detectKeyDown = (e) => {
-    if (e.key === "Enter") {
-      if (page === "masuk" && requestBody) {
-        handleLogin();
-      } else if (requestBody) handleRegister();
-    }
-  };
+  useEffect(() => {
+    document.addEventListener("keydown", detectKeyDown);
+    return () => document.removeEventListener("keydown", detectKeyDown);
+  }, [requestBody]);
+
+  async function detectKeyDown(e) {
+    if (e.key === "Enter") page === "masuk" ? handleLogin() : handleRegister();
+  }
 
   async function handleLogin() {
     jwtauthenticate(requestBody)

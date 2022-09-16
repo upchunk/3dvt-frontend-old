@@ -27,7 +27,7 @@ export const LogOutUrl = () => `/api/logout/`;
 export const LogOutAllUrl = () => `/api/logout/all/`;
 
 export const SegmentationUrl = (userid, groupname, status) =>
-  `api/segmentation/?id=${userid}&groupname=${groupname}&status=${status}`;
+  `api/segmentation/?user=${userid}&groupname=${groupname}&status=${status}`;
 
 export const SegmentationObjectUrl = (id) => `/api/segmentation/${id}/`;
 

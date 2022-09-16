@@ -13,9 +13,9 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import { postSegmentasi } from "../../utils/api";
+import { postSegmentasi } from "../utils/api";
 import { useDispatch } from "react-redux";
-import { setResultImages, setSourceImages } from "../../redux/runnerConfig";
+import { setResultImages, setSourceImages } from "../redux/runnerConfig";
 
 const baseStyle = {
   flex: 1,

@@ -24,10 +24,6 @@ export const userConfigSlice = createSlice({
   name: "userConfig",
   initialState,
   reducers: {
-    setUserid: (state, action) => {
-      state.userid = action.payload;
-    },
-
     setApikey: (state, action) => {
       state.apikey = action.payload;
     },
@@ -64,12 +60,12 @@ export const userConfigSlice = createSlice({
       const access = String(jwt.access);
       state.accessToken = access;
       state.userid = jwt_decode(access).user_id;
+      api.setDefaultToken(access);
 
       const refresh = String(jwt.refresh);
       state.refreshToken = refresh;
 
       state.isAuthenticated = true;
-      api.setDefaultToken(access);
     },
 
     setApproval: (state, action) => {
@@ -83,7 +79,6 @@ export const userConfigSlice = createSlice({
 });
 
 export const {
-  setUserid,
   setApikey,
   setLoading,
   setReload,

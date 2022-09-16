@@ -10,25 +10,23 @@ import DataSegmentasi from "./pages/dataSegmentasi/dataSegmentasi";
 import DataRekonstruksi from "./pages/dataRekonstruksi/dataRekonstruksi";
 import User from "./pages/user/user";
 import { useDispatch, useSelector } from "react-redux";
+import { getUserInfo, newRefreshToken, setDefaultToken } from "./utils/api";
 import {
-  getUserInfo,
-  listSegmentasi,
-  newRefreshToken,
-  setDefaultToken,
-} from "./utils/api";
-import { setAuth, setJwtToken, setUserData } from "./redux/userConfig";
+  setAuth,
+  setJwtToken,
+  setLoading,
+  setUserData,
+} from "./redux/userConfig";
 import AuthPage from "./pages/authPage/authPage";
-import Snackbars from "./components/snackbar/snackbar";
+import Snackbars from "./components/snackbar";
 import PrivateWrapper from "./utils/PrivateWrapper";
 import Segmentasi from "./pages/segmentasi/segmentasi";
-import { setSegData } from "./redux/runnerConfig";
 
 export default function App() {
   const userid = useSelector((state) => state.userConfig.userid);
   const jwtToken = useSelector((state) => state.userConfig.jwtToken);
   const refreshToken = useSelector((state) => state.userConfig.refreshToken);
   const accessToken = useSelector((state) => state.userConfig.accessToken);
-  const userData = useSelector((state) => state.userConfig.userData);
   const dispatch = useDispatch();
 
   function updateToken() {
@@ -52,18 +50,12 @@ export default function App() {
   }, [jwtToken]);
 
   useEffect(() => {
-    getUserInfo(userid).then((res) => {
-      if (userData === res.data) console.log(res.data);
-      else return dispatch(setUserData(res.data));
-    });
+    if (userid)
+      getUserInfo(userid).then((res) => {
+        dispatch(setUserData(res?.data));
+        dispatch(setLoading(false));
+      });
   }, [userid]);
-
-  useEffect(() => {
-    const institution = userData?.institution ? userData.institution : "";
-    listSegmentasi(userid, institution, "SUCCESS").then((res) => {
-      return dispatch(setSegData(res.data));
-    });
-  }, [userData]);
 
   return (
     <>

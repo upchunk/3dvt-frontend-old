@@ -16,7 +16,7 @@ import {
   setSourceImages,
 } from "../redux/runnerConfig";
 import { setLoading, setReload } from "../redux/userConfig";
-import { Button, Skeleton } from "@mui/material";
+import { Button, Skeleton, Typography } from "@mui/material";
 
 // const columns = [
 //   { id: "name", label: "Name", minWidth: 170 },
@@ -67,7 +67,7 @@ import { Button, Skeleton } from "@mui/material";
 //   createData("Brazil", "BR", 210147125, 8515767),
 // ];
 
-function DataTable() {
+function DataTable({ title }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -109,12 +109,20 @@ function DataTable() {
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden", p: 1 }}>
+      <Typography
+        variant="h5"
+        fontWeight={"bold"}
+        fontFamily={"montserrat"}
+        p={1}
+      >
+        Data {title}
+      </Typography>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
               <TableCell align="center">No.</TableCell>
-              <TableCell align="center">Project Segmentasi ID</TableCell>
+              <TableCell align="center">Project {title} ID</TableCell>
               <TableCell align="center">Jumlah Citra</TableCell>
               <TableCell align="center">Weight</TableCell>
               <TableCell align="center">Status</TableCell>
@@ -177,6 +185,8 @@ function DataTable() {
                   </TableCell>
                   <TableCell align="center">
                     <Button
+                      variant="contained"
+                      size="small"
                       onClick={() => handleShow(row.sources, row.results)}
                     >
                       Lihat

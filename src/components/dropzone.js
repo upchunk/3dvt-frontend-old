@@ -15,7 +15,11 @@ import {
 } from "@mui/material";
 import { postSegmentasi } from "../utils/api";
 import { useDispatch } from "react-redux";
-import { setResultImages, setSourceImages } from "../redux/runnerConfig";
+import {
+  setResultImages,
+  setShowGalery,
+  setSourceImages,
+} from "../redux/runnerConfig";
 
 const baseStyle = {
   flex: 1,
@@ -77,6 +81,7 @@ export default function StyledDropzone() {
   );
 
   useEffect(() => {
+    dispatch(setShowGalery(false));
     formData.append("user", 1);
     formData.append("model", models[modelIndex]);
   }, [modelIndex]);
@@ -116,7 +121,7 @@ export default function StyledDropzone() {
           sx={{ justifyContent: "center", alignItems: "center" }}
         >
           <Grid item xs={2}>
-            Model:
+            <Typography fontFamily={"montserrat"}>Model:</Typography>
           </Grid>
           <Grid item xs={10}>
             <FormControl fullWidth>
@@ -141,7 +146,7 @@ export default function StyledDropzone() {
           sx={{ justifyContent: "center", alignItems: "center" }}
         >
           <Grid item xs={2}>
-            Lampirkan Gambar:
+            <Typography fontFamily={"montserrat"}>Lampirkan Gambar:</Typography>
           </Grid>
           <Grid item xs={10}>
             <div className="container">
@@ -153,8 +158,10 @@ export default function StyledDropzone() {
             </div>
             {files.length !== 0 ? (
               <aside>
-                <h4>Files: </h4>
-                <ul>{files}</ul>
+                <Typography mt={1}>Files: </Typography>
+                <Typography component={"ul"} ml={3}>
+                  {files}
+                </Typography>
               </aside>
             ) : null}
           </Grid>

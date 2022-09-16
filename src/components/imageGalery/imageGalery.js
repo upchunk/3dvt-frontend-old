@@ -1,5 +1,5 @@
-import "react-image-gallery/styles/css/image-gallery.css";
 import React from "react";
+import "./imageGalery.css";
 import ImageGallery from "react-image-gallery";
 import { Card, Grid, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
@@ -14,7 +14,8 @@ export default function ImageGalleryViewer() {
         <Grid item xs={6}>
           <Typography
             align="center"
-            paddingBottom={1}
+            pb={1}
+            mb={1}
             fontFamily={"Montserrat"}
             fontWeight={"Bold"}
           >
@@ -31,7 +32,8 @@ export default function ImageGalleryViewer() {
         <Grid item xs={6}>
           <Typography
             align="center"
-            paddingBottom={1}
+            pb={1}
+            mb={1}
             fontFamily={"Montserrat"}
             fontWeight={"Bold"}
           >

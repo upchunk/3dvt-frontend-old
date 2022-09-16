@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import DataTable from "../../components/dataTable";
-import ImageGalleryViewer from "../../components/imageGalery";
+import ImageGalleryViewer from "../../components/imageGalery/imageGalery";
+
 import "./dataSegmentasi.css";
 
 export default function DataSegmentasi() {
@@ -9,7 +10,7 @@ export default function DataSegmentasi() {
 
   return (
     <div className="dataSegmentasi">
-      <DataTable />
+      <DataTable title={"Segmentasi"} />
       {showGalery ? <ImageGalleryViewer /> : null}
     </div>
   );

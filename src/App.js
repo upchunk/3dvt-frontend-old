@@ -59,7 +59,8 @@ export default function App() {
   }, [userid]);
 
   useEffect(() => {
-    listSegmentasi(userid, userData.institution, "SUCCESS").then((res) => {
+    const institution = userData?.institution ? userData.institution : "";
+    listSegmentasi(userid, institution, "SUCCESS").then((res) => {
       return dispatch(setSegData(res.data));
     });
   }, [userData]);

@@ -1,10 +1,5 @@
 /* eslint-disable no-undef */
-export const baseURL = () =>
-  process.env.NODE_ENV === "production"
-    ? "https://crawlerhub.lndata.com"
-    : process.env.NODE_ENV === "staging"
-    ? `https://crawlerhub-staging.lndata.com`
-    : `http://localhost:8000`;
+export const baseURL = () => `http://localhost:8000`;
 
 export const userInfoUrl = (id) => `/api/users/${id}/`;
 
@@ -27,7 +22,7 @@ export const LogOutUrl = () => `/api/logout/`;
 export const LogOutAllUrl = () => `/api/logout/all/`;
 
 export const SegmentationUrl = (userid, groupname, status) =>
-  `api/segmentation/?user=${userid}&groupname=${groupname}&status=${status}`;
+  `/api/segmentation/?user=${userid}&groupname=${groupname}&status=${status}`;
 
 export const SegmentationObjectUrl = (id) => `/api/segmentation/${id}/`;
 

@@ -11,6 +11,7 @@ const initialState = {
   errCatch: false,
   errMessage: "",
   errSeverity: "warning",
+  showGalery: false,
   files: [],
   sourceImages: [],
   resultImages: [],
@@ -51,6 +52,9 @@ export const runnerConfigSlice = createSlice({
     setErrSeverity: (state, action) => {
       state.errSeverity = action.payload;
     },
+    setShowGalery: (state, action) => {
+      state.showGalery = action.payload;
+    },
     setFiles: (state, action) => {
       state.files = action.payload;
     },
@@ -78,6 +82,7 @@ export const {
   setErrMessage,
   setErrCatch,
   setErrSeverity,
+  setShowGalery,
   setFiles,
   setSourceImages,
   setResultImages,

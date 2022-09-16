@@ -9,6 +9,8 @@ import { store } from "../redux/store";
 import { setAuth } from "../redux/userConfig";
 import * as url from "./urls";
 
+let controller;
+
 export const ErrorViewer = (error) => {
   const errorList = [];
   if (error.response) {
@@ -43,9 +45,17 @@ export async function getUserInfo(id) {
 }
 
 export async function getGroupInfo(id) {
-  return await axios.get(url.groupInfoUrl(id)).catch((error) => {
-    ErrorViewer(error);
-  });
+  if (controller != undefined) {
+    controller.abort();
+  }
+  controller = new AbortController();
+  return await axios
+    .get(url.groupInfoUrl(id), {
+      signal: controller.signal,
+    })
+    .catch((error) => {
+      ErrorViewer(error);
+    });
 }
 
 export async function jwtauthenticate(data) {
@@ -67,7 +77,6 @@ export async function postSegmentasi(formData) {
       },
     })
     .then((res) => {
-      console.log(res);
       store.dispatch(setErrSeverity("success"));
       store.dispatch(setErrMessage(res.data.message));
       store.dispatch(setErrCatch(true));
@@ -87,9 +96,17 @@ export async function listSegmentasi(userid = "", groupname = "", status = "") {
 }
 
 export async function getSegmentasi(id) {
-  return await axios.get(url.SegmentationObjectUrl(id)).catch((error) => {
-    ErrorViewer(error);
-  });
+  if (controller != undefined) {
+    controller.abort();
+  }
+  controller = new AbortController();
+  return await axios
+    .get(url.SegmentationObjectUrl(id), {
+      signal: controller.signal,
+    })
+    .catch((error) => {
+      ErrorViewer(error);
+    });
 }
 
 export async function Register(data) {
@@ -103,7 +120,7 @@ export async function Register(data) {
     });
 }
 
-export async function refreshToken(refresh) {
+export async function newRefreshToken(refresh) {
   const data = {
     refresh: refresh,
   };

@@ -16,13 +16,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { toHeaderCase } from "js-convert-case";
 import "./userAuth.css";
 import logo from "../../assets/Logo Horizontal Crop.png";
-import * as api from "../../utils/api";
 import { setApikey, setJwtToken } from "../../redux/userConfig";
 import {
   setErrCatch,
   setErrMessage,
   setErrSeverity,
 } from "../../redux/runnerConfig";
+import {
+  deleteAuthHeader,
+  GenerateApiKey,
+  jwtauthenticate,
+} from "../../utils/api";
 
 export default function LoginAndRegister({ page }) {
   const dispatch = useDispatch();
@@ -31,6 +35,7 @@ export default function LoginAndRegister({ page }) {
   const [requestBody, setRequestBody] = useState({});
 
   useEffect(() => {
+    deleteAuthHeader();
     document.addEventListener("keydown", detectKeyDown);
     return () => document.removeEventListener("keydown", detectKeyDown);
   }, []);
@@ -44,8 +49,7 @@ export default function LoginAndRegister({ page }) {
   };
 
   async function handleLogin() {
-    api
-      .jwtauthenticate(requestBody)
+    jwtauthenticate(requestBody)
       .then((res) => {
         if (res.data.access) {
           dispatch(setJwtToken(res.data));
@@ -54,15 +58,15 @@ export default function LoginAndRegister({ page }) {
       })
       .then(() => {
         if (!apikey || apikey === "")
-          api.GenerateApiKey(requestBody).then((apikey) => {
+          GenerateApiKey(requestBody).then((apikey) => {
             dispatch(setApikey(apikey?.token));
           });
       });
   }
 
   async function handleRegister() {
-    api.deleteAuthHeader();
-    api.Register(requestBody).then((response) => {
+    deleteAuthHeader();
+    Register(requestBody).then((response) => {
       if (response) {
         dispatch(setErrSeverity("success"));
         dispatch(setErrMessage(response.statusText));

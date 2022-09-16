@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
@@ -7,20 +7,10 @@ import { CardHeader } from "@mui/material";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/system";
-import { listSegmentasi } from "../../utils/api";
 
 export default function UserCard() {
-  const userid = useSelector((state) => state.userConfig.userid);
   const userData = useSelector((state) => state.userConfig.userData);
-  const groupNames = useSelector((state) => state.userConfig.groupNames);
-  const [segCount, setSegCount] = useState(0);
-
-  useEffect(() => {
-    listSegmentasi(userid, groupNames, "SUCCESS").then((res) =>
-      setSegCount(res.data.count)
-    );
-    console.log("Count loop");
-  }, [userid, groupNames]);
+  const segData = useSelector((state) => state.runnerConfig.segData);
 
   return (
     <div>
@@ -43,7 +33,7 @@ export default function UserCard() {
         />
         <CardActions>
           <Box padding="1vh 0.5vw">
-            <h2>{segCount}</h2>
+            <h2>{segData.count}</h2>
             <div>Projek Segmentasi</div>
             <Link to="/segmentasi/data">
               <Button
